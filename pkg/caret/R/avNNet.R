@@ -54,7 +54,7 @@ avNNet.default <- function(x, y, repeats = 5,
     ## check for factors
     ## this is from nnet.formula
 
-    ind <- seq(along = y)
+    ind <- seq(nrow(y))
     if(is.factor(y))
       {
         classLev <- levels(y)
