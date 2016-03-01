@@ -54,7 +54,9 @@ avNNet.default <- function(x, y, repeats = 5,
     ## check for factors
     ## this is from nnet.formula
 
-    ind <- seq(nrow(y))
+    xind <- seq(nrow(y))
+    yind <- seq(along=y)
+
     if(is.factor(y))
       {
         classLev <- levels(y)
@@ -79,7 +81,7 @@ avNNet.default <- function(x, y, repeats = 5,
         } else cat("Fitting Repeat", i, "\n\n")
       set.seed(as.integer(seeds[i]))
       if(bag)  ind <- sample(1:nrow(x), replace = TRUE)
-      thisMod <- if(is.null(classLev)) nnet::nnet(x[ind,,drop = FALSE], y[ind], ...) else nnet::nnet(x[ind,,drop = FALSE], y[ind,], ...)
+      thisMod <- if(is.null(classLev)) nnet::nnet(x[xind,,drop = FALSE], y[yind], ...) else nnet::nnet(x[xind,,drop = FALSE], y[xind,], ...)
       thisMod$lev <- classLev
       thisMod
     }
